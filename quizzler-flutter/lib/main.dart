@@ -29,26 +29,20 @@ class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
   QuizBrain qb = QuizBrain();
-  int currentIndex = 0;
 
-  checkAnswers(bool selectedOption) {
-    bool correctAnswer = qb.getQuestionAnswer(currentIndex);
-
-    if (selectedOption != correctAnswer) {
-      setState(() {
-        addScore(false);
-      });
-    } else {
-      setState(() {
+  void checkAnswers(bool userPickedAnswer) {
+    bool correctAnswer = qb.getQuestionAnswer();
+    setState(() {
+      if (userPickedAnswer == correctAnswer) {
         addScore(true);
-      });
-    }
-    increaseIndex();
+      } else {
+        addScore(false);
+      }
+      increaseIndex();
+    });
   }
 
   addScore(bool isRight) {
-    print(currentIndex);
-
     if (isRight) {
       scoreKeeper.add(Icon(
         Icons.check,
@@ -63,9 +57,7 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   increaseIndex() {
-    if (currentIndex < qb.questionBank.length - 1) {
-      currentIndex++;
-    }
+    qb.nextQuestion();
   }
 
   @override
@@ -80,7 +72,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                qb.questionBank[currentIndex].q,
+                qb.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
