@@ -1,6 +1,6 @@
+import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 
-import 'constants.dart';
 
 const cardSubtitleTextColor = Color(0xFF8D8E98);
 
@@ -20,7 +20,7 @@ class IconContent extends StatelessWidget {
         ),
         Text(
           label,
-          style: kLabelStyle,
+          style: kLabelTextStyle,
         ),
       ],
     );
