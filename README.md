@@ -9,3 +9,4 @@
  5. Mi card
  6. Xylophone 
  7. Quizzler
+ 8. BMI Calculator
