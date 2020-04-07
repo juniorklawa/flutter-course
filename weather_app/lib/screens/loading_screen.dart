@@ -1,5 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+
+import '../services/location.dart';
+import '../services/networking.dart';
+import '../services/networking.dart';
+
+const apiKey = '4afa87f78850b1bb173e07c791a09750';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -7,30 +13,36 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  double latitude;
+  double longitude;
+
+  void getLocationData() async {
+    Location location = Location();
+    await location.getCurrentLocation();
+
+    latitude = location.latitude;
+    longitude = location.longitude;
+
+    NetworkHelper networkHelper = NetworkHelper(
+        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey');
+
+    var weatherData = await networkHelper.getData();
+
+    // Navigator.push(context, route);
+  }
+
+  @override
   void initState() {
     super.initState();
-    getLocation();
+    getLocationData();
   }
 
   void deactivate() {
     super.deactivate();
   }
 
-  void getLocation() async {
-    Position position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
-    print(position);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {},
-          child: Text('Get location'),
-        ),
-      ),
-    );
+    return Scaffold();
   }
 }
