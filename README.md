@@ -1,6 +1,6 @@
 # Projects developed in this Course
 
- ## [The Complete 2020 Flutter Development Bootcamp with Dart](https://www.udemy.com/course/flutter-bootcamp-with-dart/)
+ ### [The Complete 2020 Flutter Development Bootcamp with Dart](https://www.udemy.com/course/flutter-bootcamp-with-dart/)
 
  1. I am poor
  2. Magic 8 Ball
